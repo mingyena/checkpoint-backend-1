@@ -1,5 +1,6 @@
 let express = require("express");
 let mongoose = require("mongoose");
+let fetch = require("node-fetch");
 const app = express();
 let bodyParser = require("body-parser");
 const fs = require('fs');
@@ -46,6 +47,14 @@ let TaskRoutes  = require("./routes/TaskRoutes");
 app.use(OrderRoutes);
 app.use(CommentRoutes);
 app.use(TaskRoutes);
+
+//Node Fetch
+app.route('/foxes')
+  .get(function(req,res){
+    fetch('https://randomfox.ca/floof/')
+    .then(res => res.json())
+    .then(json => {res.send(`<image src=${json.image}>`)});
+});
 
 app.listen(3001, (err) => {
 if (err) {
