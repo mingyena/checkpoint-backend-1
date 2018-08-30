@@ -24,7 +24,8 @@ app.route('/dateTime')
 
 app.route('/newComments')
   .get(function(req,res){
-    res.send(data[3]);
+    let comments = data[3].split('\n')
+    res.send(comments[1]);
   });
 app.route('/newTasks')
   .get(function(req,res){
@@ -53,7 +54,7 @@ app.route('/foxes')
   .get(function(req,res){
     fetch('https://randomfox.ca/floof/')
     .then(res => res.json())
-    .then(json => {res.send(`<image src=${json.image}>`)});
+    .then(json => {res.json(json.image)});
 });
 
 app.listen(3001, (err) => {
